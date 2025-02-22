@@ -14,44 +14,54 @@
             overflow-x: hidden;
         }
         header {
-            padding: 50px;
-            background: rgba(0, 0, 0, 0.7);
+            padding: 60px;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 3px solid #00f0ff;
         }
         h1 {
-            font-size: 3em;
+            font-size: 3.5em;
+            color: #00f0ff;
+            text-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+            margin: 0;
+        }
+        h2 {
+            font-size: 2em;
             color: #00f0ff;
             text-shadow: 0 0 10px #00f0ff;
+            margin: 20px 0;
         }
         p {
             font-size: 1.2em;
-            max-width: 600px;
+            max-width: 700px;
             margin: 20px auto;
+            line-height: 1.6;
         }
         .cat-container {
-            margin: 30px 0;
+            margin: 40px 0;
         }
         .cat-image {
-            width: 300px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px #00f0ff;
+            width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px #00f0ff;
         }
-        .description {
-            max-width: 800px;
-            margin: 30px auto;
-            font-size: 1.1em;
-            line-height: 1.5;
+        .description, .roadmap, .quantum-facts {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
         }
         .links {
-            margin: 30px 0;
+            margin: 40px 0;
         }
         a {
             color: #00f0ff;
             text-decoration: none;
             font-weight: bold;
-            padding: 10px 20px;
-            border: 2px solid #00f0ff;
-            border-radius: 5px;
-            margin: 0 10px;
+            padding: 12px 25px;
+            border: 3px solid #00f0ff;
+            border-radius: 8px;
+            margin: 0 15px;
             transition: all 0.3s;
         }
         a:hover {
@@ -59,35 +69,40 @@
             color: #0a0a23;
         }
         .game-container {
-            margin: 50px 0;
+            margin: 60px auto;
             position: relative;
-            height: 400px;
+            height: 500px;
             width: 80%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            border: 2px solid #00f0ff;
-            border-radius: 10px;
+            max-width: 1000px;
+            border: 3px solid #00f0ff;
+            border-radius: 15px;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
         }
         #gameCat {
-            width: 100px;
+            width: 120px;
             position: absolute;
             cursor: pointer;
-            transition: all 0.2s;
+            animation: runCat 2s infinite linear;
+        }
+        @keyframes runCat {
+            0% { transform: translateX(0) scaleX(1); }
+            50% { transform: translateX(100%) scaleX(-1); }
+            100% { transform: translateX(0) scaleX(1); }
         }
         #score {
-            font-size: 1.5em;
+            font-size: 1.8em;
             margin: 20px;
+            color: #00f0ff;
+            text-shadow: 0 0 10px #00f0ff;
         }
         button {
             background: none;
             color: #00f0ff;
-            border: 2px solid #00f0ff;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border-radius: 5px;
+            border: 3px solid #00f0ff;
+            padding: 12px 25px;
+            font-size: 1.3em;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -95,35 +110,67 @@
             background: #00f0ff;
             color: #0a0a23;
         }
-        footer {
-            padding: 20px;
-            font-size: 0.9em;
+        .roadmap ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.1em;
+        }
+        .roadmap li {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        .quantum-facts p {
+            font-style: italic;
             color: #ccc;
+        }
+        footer {
+            padding: 30px;
+            font-size: 1em;
+            color: #ccc;
+            border-top: 2px solid #00f0ff;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>QuantumCat (QCAT)</h1>
-        <p>Schrödinger’s favorite memecoin—both alive and pumping! Join the quantum leap to a $1M market cap.</p>
+        <p>Schrödinger’s ultimate memecoin—running wild toward a $100M market cap!</p>
     </header>
     <div class="cat-container">
         <img src="https://i.imgur.com/654CEcc.jpeg" alt="QuantumCat" class="cat-image">
     </div>
     <div class="description">
-        <p>QuantumCat (QCAT) is more than just a memecoin—it’s a cosmic joke wrapped in a quantum enigma. Inspired by Schrödinger’s famous thought experiment, where a cat can be both alive and dead until observed, QCAT embodies the wild uncertainty of the crypto world. Is it a moonshot or a rugpull? Only the blockchain knows, and we’re here to find out. Born on Pump.fun in February 2025, QuantumCat fuses the internet’s love for feline chaos with the cutting-edge buzz of quantum computing—a field promising to revolutionize tech as we know it. Our mission? To ride this wave of absurdity and innovation to a $1M market cap, proving that even the most unpredictable ideas can collapse into something real. Join us, catch the cat, and let’s see which state this token lands in!</p>
+        <h2>The Meaning of QuantumCat</h2>
+        <p>QuantumCat (QCAT) is the memecoin that dares to exist in two states at once—pumping and dumping—until the market observes its fate. Inspired by Erwin Schrödinger’s paradox, where a cat’s life hangs in quantum limbo, QCAT captures the chaotic thrill of crypto speculation. Launched on Pump.fun in February 2025, this isn’t just another feline token; it’s a tribute to the quantum revolution—where tech giants race to harness subatomic power—and the internet’s undying love for cats. Our audacious goal? A $100M market cap, turning a playful meme into a financial phenomenon. QCAT is the superposition of absurdity and ambition: a coin that’s both a joke and a jackpot, racing across the blockchain like a cat chasing lasers. Join the experiment, catch the cat, and let’s collapse this wave function into wealth!</p>
     </div>
     <div class="links">
         <a href="https://pump.fun" target="_blank">Buy on Pump.fun</a>
         <a href="https://twitter.com/QuantumCatQCAT" target="_blank">Follow on X</a>
     </div>
+    <div class="roadmap">
+        <h2>Roadmap to $100M</h2>
+        <ul>
+            <li><strong>Phase 1: Launch</strong> - Drop QCAT on Pump.fun, ignite the community, hit $1M MC fast.</li>
+            <li><strong>Phase 2: Hype</strong> - Viral memes, X shilling, and cat-chasing frenzy to $10M.</li>
+            <li><strong>Phase 3: Quantum Leap</strong> - Partnerships, listings, and quantum-themed events to $100M.</li>
+            <li><strong>Phase 4: Moon</strong> - Celebrate as QCAT becomes the king of memecoins!</li>
+        </ul>
+    </div>
     <div class="game-container">
         <p id="score">Score: 0</p>
-        <img id="gameCat" src="https://i.imgur.com/654CEcc.jpeg" alt="Game Cat">
-        <button id="startGame">Play Catch the QuantumCat!</button>
+        <img id="gameCat" src="https://i.imgur.com/654CEcc.jpeg" alt="Running QuantumCat">
+        <button id="startGame">Chase the QuantumCat!</button>
+    </div>
+    <div class="quantum-facts">
+        <h2>Quantum Cat Facts</h2>
+        <p>“In a quantum state, QCAT’s value is infinite—until you sell.”</p>
+        <p>“This cat runs at 299,792 km/s squared—catch it if you can!”</p>
+        <p>“Schrödinger approves: 50% meme, 50% moon, 100% chaos.”</p>
     </div>
     <footer>
-        <p>Created by the QCAT community | Launch Date: Feb 2025</p>
+        <p>Created by the QCAT community | Launched Feb 2025 | Let’s hit $100M together!</p>
     </footer>
 
     <script>
@@ -157,12 +204,12 @@
                 gameActive = true;
                 score = 0;
                 scoreDisplay.textContent = `Score: ${score}`;
-                startButton.textContent = 'Stop Game';
-                moveCat();
+                startButton.textContent = 'Stop Chase';
                 cat.style.display = 'block';
+                moveCat();
             } else {
                 gameActive = false;
-                startButton.textContent = 'Play Catch the QuantumCat!';
+                startButton.textContent = 'Chase the QuantumCat!';
                 cat.style.display = 'none';
             }
         });
