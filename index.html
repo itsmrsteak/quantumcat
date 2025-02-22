@@ -80,44 +80,63 @@
             background: rgba(0, 0, 0, 0.7);
         }
         #gameCat {
-            width: 100px;
-            height: 60px;
+            width: 120px;
+            height: 80px;
             position: absolute;
             cursor: pointer;
-            background: #00f0ff;
-            border-radius: 50% 50% 30% 30%;
-            box-shadow: 0 0 15px #00f0ff;
-            animation: runCat 3s infinite ease-in-out;
+            transition: opacity 0.3s;
         }
-        #gameCat::before {
-            content: '';
+        #gameCat .head {
+            width: 60px;
+            height: 60px;
+            background: #00f0ff;
+            border-radius: 50%;
             position: absolute;
-            width: 20px;
-            height: 20px;
+            top: 0;
+            left: 30px;
+            box-shadow: 0 0 15px #00f0ff;
+        }
+        #gameCat .head::before {
+            content: '';
+            width: 15px;
+            height: 15px;
             background: #000;
             border-radius: 50%;
-            top: 10px;
-            left: 20px;
-            box-shadow: 30px 0 0 #000;
-        }
-        #gameCat::after {
-            content: '';
             position: absolute;
+            top: 15px;
+            left: 15px;
+            box-shadow: 20px 0 0 #000;
+        }
+        #gameCat .head::after {
+            content: '';
             width: 0;
             height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 25px solid #00f0ff;
-            top: -25px;
-            left: 35px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #00f0ff;
+            position: absolute;
+            top: -20px;
+            left: 25px;
         }
-        @keyframes runCat {
-            0% { transform: translateX(0) scaleX(1); }
-            25% { transform: translateX(30%) translateY(-20%) scaleX(-1); }
-            50% { transform: translateX(60%) translateY(20%) scaleX(1); }
-            75% { transform: translateX(30%) translateY(-10%) scaleX(-1); }
-            100% { transform: translateX(0) translateY(0) scaleX(1); }
+        #gameCat .paws {
+            width: 80px;
+            height: 20px;
+            position: absolute;
+            bottom: 0;
+            left: 20px;
         }
+        #gameCat .paws::before, #gameCat .paws::after {
+            content: '';
+            width: 25px;
+            height: 25px;
+            background: #00f0ff;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            box-shadow: 0 0 10px #00f0ff;
+        }
+        #gameCat .paws::before { left: 0; }
+        #gameCat .paws::after { right: 0; }
         #score {
             font-size: 1.8em;
             margin: 20px;
@@ -168,8 +187,11 @@
     </div>
     <div class="game-container">
         <p id="score">Score: 0</p>
-        <div id="gameCat"></div>
-        <button id="startGame">Chase the QuantumCat!</button>
+        <div id="gameCat">
+            <div class="head"></div>
+            <div class="paws"></div>
+        </div>
+        <button id="startGame">Catch the QuantumCat!</button>
     </div>
     <div class="quantum-facts">
         <h2>Quantum Cat Facts</h2>
@@ -188,8 +210,9 @@
         const startButton = document.getElementById('startGame');
         let score = 0;
         let gameActive = false;
+        let popInterval;
 
-        function moveCat() {
+        function popCat() {
             if (!gameActive) return;
             const maxX = gameContainer.offsetWidth - cat.offsetWidth;
             const maxY = gameContainer.offsetHeight - cat.offsetHeight;
@@ -197,13 +220,18 @@
             const newY = Math.floor(Math.random() * maxY);
             cat.style.left = newX + 'px';
             cat.style.top = newY + 'px';
+            cat.style.opacity = '1';
+            setTimeout(() => {
+                if (gameActive) cat.style.opacity = '0';
+            }, 1500); // Hides after 1.5 seconds
         }
 
         cat.addEventListener('click', () => {
-            if (gameActive) {
+            if (gameActive && cat.style.opacity === '1') {
                 score++;
                 scoreDisplay.textContent = `Score: ${score}`;
-                moveCat();
+                cat.style.opacity = '0'; // Hide immediately on click
+                setTimeout(popCat, 200); // Quick re-pop after click
             }
         });
 
@@ -212,18 +240,22 @@
                 gameActive = true;
                 score = 0;
                 scoreDisplay.textContent = `Score: ${score}`;
-                startButton.textContent = 'Stop Chase';
+                startButton.textContent = 'Stop Game';
                 cat.style.display = 'block';
-                moveCat();
+                popCat();
+                popInterval = setInterval(popCat, 2000); // Pops every 2 seconds
             } else {
                 gameActive = false;
-                startButton.textContent = 'Chase the QuantumCat!';
+                clearInterval(popInterval);
+                startButton.textContent = 'Catch the QuantumCat!';
+                cat.style.opacity = '0';
                 cat.style.display = 'none';
             }
         });
 
         // Hide cat initially
         cat.style.display = 'none';
+        cat.style.opacity = '0';
     </script>
 </body>
 </html>
