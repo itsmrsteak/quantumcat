@@ -65,8 +65,7 @@
         <p>Schrödinger’s favorite memecoin—both alive and pumping! Join the quantum leap to a $1M market cap.</p>
     </header>
     <div class="cat-container">
-        <!-- Replace with your QuantumCat image URL -->
-        <img src="https://i.imgur.com/654CEcc.jpeg"> 
+        <img src="https://i.imgur.com/654CEcc.jpeg" alt="QuantumCat" class="cat-image">
     </div>
     <div class="links">
         <a href="https://pump.fun" target="_blank">Buy on Pump.fun</a>
