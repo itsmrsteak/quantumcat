@@ -44,7 +44,7 @@
             border-radius: 15px;
             box-shadow: 0 0 25px #00f0ff;
         }
-        .description, .roadmap, .quantum-facts {
+        .description, .quantum-facts {
             max-width: 900px;
             margin: 40px auto;
             padding: 20px;
@@ -80,15 +80,43 @@
             background: rgba(0, 0, 0, 0.7);
         }
         #gameCat {
-            width: 120px;
+            width: 100px;
+            height: 60px;
             position: absolute;
             cursor: pointer;
-            animation: runCat 2s infinite linear;
+            background: #00f0ff;
+            border-radius: 50% 50% 30% 30%;
+            box-shadow: 0 0 15px #00f0ff;
+            animation: runCat 3s infinite ease-in-out;
+        }
+        #gameCat::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border-radius: 50%;
+            top: 10px;
+            left: 20px;
+            box-shadow: 30px 0 0 #000;
+        }
+        #gameCat::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid #00f0ff;
+            top: -25px;
+            left: 35px;
         }
         @keyframes runCat {
             0% { transform: translateX(0) scaleX(1); }
-            50% { transform: translateX(100%) scaleX(-1); }
-            100% { transform: translateX(0) scaleX(1); }
+            25% { transform: translateX(30%) translateY(-20%) scaleX(-1); }
+            50% { transform: translateX(60%) translateY(20%) scaleX(1); }
+            75% { transform: translateX(30%) translateY(-10%) scaleX(-1); }
+            100% { transform: translateX(0) translateY(0) scaleX(1); }
         }
         #score {
             font-size: 1.8em;
@@ -109,17 +137,6 @@
         button:hover {
             background: #00f0ff;
             color: #0a0a23;
-        }
-        .roadmap ul {
-            list-style: none;
-            padding: 0;
-            font-size: 1.1em;
-        }
-        .roadmap li {
-            margin: 15px 0;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
         }
         .quantum-facts p {
             font-style: italic;
@@ -149,18 +166,9 @@
         <a href="https://pump.fun" target="_blank">Buy on Pump.fun</a>
         <a href="https://twitter.com/QuantumCatQCAT" target="_blank">Follow on X</a>
     </div>
-    <div class="roadmap">
-        <h2>Roadmap to $100M</h2>
-        <ul>
-            <li><strong>Phase 1: Launch</strong> - Drop QCAT on Pump.fun, ignite the community, hit $1M MC fast.</li>
-            <li><strong>Phase 2: Hype</strong> - Viral memes, X shilling, and cat-chasing frenzy to $10M.</li>
-            <li><strong>Phase 3: Quantum Leap</strong> - Partnerships, listings, and quantum-themed events to $100M.</li>
-            <li><strong>Phase 4: Moon</strong> - Celebrate as QCAT becomes the king of memecoins!</li>
-        </ul>
-    </div>
     <div class="game-container">
         <p id="score">Score: 0</p>
-        <img id="gameCat" src="https://i.imgur.com/654CEcc.jpeg" alt="Running QuantumCat">
+        <div id="gameCat"></div>
         <button id="startGame">Chase the QuantumCat!</button>
     </div>
     <div class="quantum-facts">
