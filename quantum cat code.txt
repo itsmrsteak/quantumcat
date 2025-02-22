@@ -66,7 +66,7 @@
     </header>
     <div class="cat-container">
         <!-- Replace with your QuantumCat image URL -->
-        <img src="https://via.placeholder.com/300x300.png?text=QuantumCat" alt="QuantumCat" class="cat-image">
+        <img src="https://via.placeholder.com/300x300.png?text=QuantumCat" alt="QuantumCat" class="cat-image"> https://i.imgur.com/654CEcc.jpeg
     </div>
     <div class="links">
         <a href="https://pump.fun" target="_blank">Buy on Pump.fun</a>
