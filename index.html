@@ -35,6 +35,12 @@
             border-radius: 10px;
             box-shadow: 0 0 20px #00f0ff;
         }
+        .description {
+            max-width: 800px;
+            margin: 30px auto;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
         .links {
             margin: 30px 0;
         }
@@ -49,6 +55,43 @@
             transition: all 0.3s;
         }
         a:hover {
+            background: #00f0ff;
+            color: #0a0a23;
+        }
+        .game-container {
+            margin: 50px 0;
+            position: relative;
+            height: 400px;
+            width: 80%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid #00f0ff;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        #gameCat {
+            width: 100px;
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        #score {
+            font-size: 1.5em;
+            margin: 20px;
+        }
+        button {
+            background: none;
+            color: #00f0ff;
+            border: 2px solid #00f0ff;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
             background: #00f0ff;
             color: #0a0a23;
         }
@@ -67,12 +110,65 @@
     <div class="cat-container">
         <img src="https://i.imgur.com/654CEcc.jpeg" alt="QuantumCat" class="cat-image">
     </div>
+    <div class="description">
+        <p>QuantumCat (QCAT) is more than just a memecoin—it’s a cosmic joke wrapped in a quantum enigma. Inspired by Schrödinger’s famous thought experiment, where a cat can be both alive and dead until observed, QCAT embodies the wild uncertainty of the crypto world. Is it a moonshot or a rugpull? Only the blockchain knows, and we’re here to find out. Born on Pump.fun in February 2025, QuantumCat fuses the internet’s love for feline chaos with the cutting-edge buzz of quantum computing—a field promising to revolutionize tech as we know it. Our mission? To ride this wave of absurdity and innovation to a $1M market cap, proving that even the most unpredictable ideas can collapse into something real. Join us, catch the cat, and let’s see which state this token lands in!</p>
+    </div>
     <div class="links">
         <a href="https://pump.fun" target="_blank">Buy on Pump.fun</a>
         <a href="https://twitter.com/QuantumCatQCAT" target="_blank">Follow on X</a>
     </div>
+    <div class="game-container">
+        <p id="score">Score: 0</p>
+        <img id="gameCat" src="https://i.imgur.com/654CEcc.jpeg" alt="Game Cat">
+        <button id="startGame">Play Catch the QuantumCat!</button>
+    </div>
     <footer>
         <p>Created by the QCAT community | Launch Date: Feb 2025</p>
     </footer>
+
+    <script>
+        const cat = document.getElementById('gameCat');
+        const gameContainer = document.querySelector('.game-container');
+        const scoreDisplay = document.getElementById('score');
+        const startButton = document.getElementById('startGame');
+        let score = 0;
+        let gameActive = false;
+
+        function moveCat() {
+            if (!gameActive) return;
+            const maxX = gameContainer.offsetWidth - cat.offsetWidth;
+            const maxY = gameContainer.offsetHeight - cat.offsetHeight;
+            const newX = Math.floor(Math.random() * maxX);
+            const newY = Math.floor(Math.random() * maxY);
+            cat.style.left = newX + 'px';
+            cat.style.top = newY + 'px';
+        }
+
+        cat.addEventListener('click', () => {
+            if (gameActive) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                moveCat();
+            }
+        });
+
+        startButton.addEventListener('click', () => {
+            if (!gameActive) {
+                gameActive = true;
+                score = 0;
+                scoreDisplay.textContent = `Score: ${score}`;
+                startButton.textContent = 'Stop Game';
+                moveCat();
+                cat.style.display = 'block';
+            } else {
+                gameActive = false;
+                startButton.textContent = 'Play Catch the QuantumCat!';
+                cat.style.display = 'none';
+            }
+        });
+
+        // Hide cat initially
+        cat.style.display = 'none';
+    </script>
 </body>
 </html>
