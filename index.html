@@ -79,64 +79,19 @@
             overflow: hidden;
             background: rgba(0, 0, 0, 0.7);
         }
+        #gameCat, #gameMouse {
+            position: absolute;
+            transition: all 0.5s ease;
+        }
         #gameCat {
-            width: 120px;
-            height: 80px;
-            position: absolute;
+            width: 150px;
             cursor: pointer;
-            transition: opacity 0.3s;
+            z-index: 2;
         }
-        #gameCat .head {
-            width: 60px;
-            height: 60px;
-            background: #00f0ff;
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 30px;
-            box-shadow: 0 0 15px #00f0ff;
-        }
-        #gameCat .head::before {
-            content: '';
-            width: 15px;
-            height: 15px;
-            background: #000;
-            border-radius: 50%;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            box-shadow: 20px 0 0 #000;
-        }
-        #gameCat .head::after {
-            content: '';
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 20px solid #00f0ff;
-            position: absolute;
-            top: -20px;
-            left: 25px;
-        }
-        #gameCat .paws {
+        #gameMouse {
             width: 80px;
-            height: 20px;
-            position: absolute;
-            bottom: 0;
-            left: 20px;
+            z-index: 1;
         }
-        #gameCat .paws::before, #gameCat .paws::after {
-            content: '';
-            width: 25px;
-            height: 25px;
-            background: #00f0ff;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 0;
-            box-shadow: 0 0 10px #00f0ff;
-        }
-        #gameCat .paws::before { left: 0; }
-        #gameCat .paws::after { right: 0; }
         #score {
             font-size: 1.8em;
             margin: 20px;
@@ -187,10 +142,8 @@
     </div>
     <div class="game-container">
         <p id="score">Score: 0</p>
-        <div id="gameCat">
-            <div class="head"></div>
-            <div class="paws"></div>
-        </div>
+        <img id="gameCat" src="https://clipart-library.com/images_k/cat-transparent-background/cat-transparent-background-11.png" alt="QuantumCat">
+        <img id="gameMouse" src="https://clipart-library.com/images_k/mouse-transparent/mouse-transparent-10.png" alt="Mouse">
         <button id="startGame">Catch the QuantumCat!</button>
     </div>
     <div class="quantum-facts">
@@ -205,33 +158,42 @@
 
     <script>
         const cat = document.getElementById('gameCat');
+        const mouse = document.getElementById('gameMouse');
         const gameContainer = document.querySelector('.game-container');
         const scoreDisplay = document.getElementById('score');
         const startButton = document.getElementById('startGame');
         let score = 0;
         let gameActive = false;
-        let popInterval;
+        let chaseInterval;
 
-        function popCat() {
+        function moveCharacters() {
             if (!gameActive) return;
             const maxX = gameContainer.offsetWidth - cat.offsetWidth;
             const maxY = gameContainer.offsetHeight - cat.offsetHeight;
-            const newX = Math.floor(Math.random() * maxX);
-            const newY = Math.floor(Math.random() * maxY);
-            cat.style.left = newX + 'px';
-            cat.style.top = newY + 'px';
-            cat.style.opacity = '1';
-            setTimeout(() => {
-                if (gameActive) cat.style.opacity = '0';
-            }, 1500); // Hides after 1.5 seconds
+            const mouseMaxX = gameContainer.offsetWidth - mouse.offsetWidth;
+            const mouseMaxY = gameContainer.offsetHeight - mouse.offsetHeight;
+
+            // Mouse moves first
+            const mouseX = Math.floor(Math.random() * mouseMaxX);
+            const mouseY = Math.floor(Math.random() * mouseMaxY);
+            mouse.style.left = mouseX + 'px';
+            mouse.style.top = mouseY + 'px';
+
+            // Cat chases the mouse (slightly offset)
+            const catX = Math.min(maxX, Math.max(0, mouseX + (Math.random() * 100 - 50)));
+            const catY = Math.min(maxY, Math.max(0, mouseY + (Math.random() * 100 - 50)));
+            cat.style.left = catX + 'px';
+            cat.style.top = catY + 'px';
+
+            // Flip cat direction based on mouse position
+            cat.style.transform = catX < mouseX ? 'scaleX(-1)' : 'scaleX(1)';
         }
 
         cat.addEventListener('click', () => {
-            if (gameActive && cat.style.opacity === '1') {
+            if (gameActive) {
                 score++;
                 scoreDisplay.textContent = `Score: ${score}`;
-                cat.style.opacity = '0'; // Hide immediately on click
-                setTimeout(popCat, 200); // Quick re-pop after click
+                moveCharacters(); // Immediate reposition on click
             }
         });
 
@@ -240,22 +202,23 @@
                 gameActive = true;
                 score = 0;
                 scoreDisplay.textContent = `Score: ${score}`;
-                startButton.textContent = 'Stop Game';
+                startButton.textContent = 'Stop Chase';
                 cat.style.display = 'block';
-                popCat();
-                popInterval = setInterval(popCat, 2000); // Pops every 2 seconds
+                mouse.style.display = 'block';
+                moveCharacters();
+                chaseInterval = setInterval(moveCharacters, 1500); // New position every 1.5 seconds
             } else {
                 gameActive = false;
-                clearInterval(popInterval);
+                clearInterval(chaseInterval);
                 startButton.textContent = 'Catch the QuantumCat!';
-                cat.style.opacity = '0';
                 cat.style.display = 'none';
+                mouse.style.display = 'none';
             }
         });
 
-        // Hide cat initially
+        // Hide characters initially
         cat.style.display = 'none';
-        cat.style.opacity = '0';
+        mouse.style.display = 'none';
     </script>
 </body>
 </html>
